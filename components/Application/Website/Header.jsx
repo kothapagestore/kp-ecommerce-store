@@ -81,7 +81,7 @@ const Header = () => {
                   href={`${WEBSITE_SHOP}?category=t-shirts`}
                   className="block py-2"
                 >
-                  T-shirt
+                  Women
                 </Link>
               </li>
               <li className="text-gray-600 hover:text-primary hover:font-semibold">
