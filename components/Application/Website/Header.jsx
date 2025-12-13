@@ -97,7 +97,7 @@ const Header = () => {
                   href={`${WEBSITE_SHOP}?category=overshized`}
                   className="block py-2"
                 >
-                  Oversized
+                  Kids
                 </Link>
               </li>
             </ul>
