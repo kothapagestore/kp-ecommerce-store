@@ -58,9 +58,7 @@ export async function POST(request) {
       'Email Verification request from Kothapage store',
       email,
       emailVerificationLink(
-        `${
-          process.env.NEXT_PUBLIC_BASE_URL
-        }/auth/verify-email?token=${encodeURIComponent(token)}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify-email/${token}`
       )
     );
 
