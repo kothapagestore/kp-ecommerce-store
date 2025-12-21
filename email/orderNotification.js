@@ -1,5 +1,5 @@
 export const orderNotification = (data) => {
-    const html = `
+  const html = `
         <!DOCTYPE html>
   <html lang="en-US" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
@@ -210,7 +210,7 @@ export const orderNotification = (data) => {
 																style="width:100%;padding-right:0px;padding-left:0px;">
 																<div align="center" class="alignment">
 																	<div style="max-width: 248px;"><img alt="Logo"
-																			height="auto" src="https://res.cloudinary.com/dg7efdu9o/image/upload/v1747200653/logo-black_luvjrd.webp"
+																			height="auto" src="https://res.cloudinary.com/dkfb0ysld/image/upload/v1766301931/zoesppv1qgwue3lnyvll.png"
 																			style="display: block; height: auto; border: 0; width: 100%;"
 																			title="Logo" width="248" /></div>
 																</div>
@@ -756,5 +756,5 @@ export const orderNotification = (data) => {
 </html>
 `;
 
-    return html;
+  return html;
 };
