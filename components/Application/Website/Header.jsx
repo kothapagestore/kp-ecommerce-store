@@ -13,7 +13,6 @@ import {
   WEBSITE_HOME,
   WEBSITE_SHOP,
   WEBSITE_LOGIN,
-  USER_DASHBOARD,
 } from '@/routes/WebsiteRoute';
 
 export default function Header() {
@@ -21,8 +20,13 @@ export default function Header() {
 
   return (
     <>
+      {/* ANNOUNCEMENT BAR */}
+      <div className="fixed top-0 left-0 w-full z-[60] bg-black text-white text-center text-sm py-2">
+        Free Shipping on Orders Above ₹999 🚚
+      </div>
+
       {/* HEADER */}
-      <header className="absolute top-0 left-0 w-full z-50">
+      <header className="absolute top-[40px] left-0 w-full z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-white">
           {/* LOGO */}
           <Link href={WEBSITE_HOME} className="flex items-center gap-2">
