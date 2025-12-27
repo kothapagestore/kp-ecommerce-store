@@ -1,55 +1,150 @@
 'use client';
+import {
+  USER_DASHBOARD,
+  WEBSITE_HOME,
+  WEBSITE_LOGIN,
+  WEBSITE_SHOP,
+} from '@/routes/WebsiteRoute';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import logo from '@/public/assets/images/logo-black.png';
+import { IoIosSearch } from 'react-icons/io';
+import Cart from './Cart';
+import { VscAccount } from 'react-icons/vsc';
+import { useSelector } from 'react-redux';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import userIcon from '@/public/assets/images/user.png';
+import { IoMdClose } from 'react-icons/io';
 
-import { LuSearch, LuShoppingCart, LuUser } from 'react-icons/lu';
+import { HiMiniBars3 } from 'react-icons/hi2';
+import Search from './Search';
 
-export default function Header() {
+const Header = () => {
+  const auth = useSelector((store) => store.authStore.auth);
+  const [isMobileMenu, setIsMobileMenu] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   return (
-    <header className="absolute top-0 left-0 w-full z-50">
-      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <span className="text-xl"></span>
-          <div>
-            <h1 className="text-xl font-bold text-orange-500">Kothapage</h1>
-            <p className="text-xs text-white/80">KP Store Online</p>
-          </div>
-        </div>
-
-        {/* Menu */}
-        <nav className="hidden md:flex items-center gap-8">
-          {['Home', 'About', 'Men', 'Women', 'Fashion', 'Kids'].map(
-            (item, i) => (
-              <a
-                key={i}
-                className={`text-sm font-semibold cursor-pointer transition ${
-                  item === 'Home'
-                    ? 'text-orange-500'
-                    : 'text-white hover:text-orange-400'
-                }`}
-              >
-                {item}
-              </a>
-            )
-          )}
-        </nav>
-
-        {/* Icons */}
-        <div className="flex items-center gap-5 text-white">
-          <LuSearch
-            size={20}
-            className="cursor-pointer hover:text-orange-400"
+    <div className="bg-white border-b lg:px-01 px-01">
+      <div className="flex justify-between items-center lg:py-1 py-1">
+        <Link href={WEBSITE_HOME}>
+          <Image
+            src={logo}
+            width={383}
+            height={146}
+            alt="logo"
+            className="lg:w-50 w-10"
           />
+        </Link>
 
-          <div className="relative cursor-pointer">
-            <LuShoppingCart size={22} className="hover:text-orange-400" />
-            <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-              0
-            </span>
+        <div className="flex justify-between gap-20">
+          <nav
+            className={`lg:relative lg:w-auto lg:h-auto lg:top-0 lg:left-0 lg:p-0 bg-white fixed z-50 top-0 w-full h-screen transition-all ${
+              isMobileMenu ? 'left-0' : '-left-full'
+            }`}
+          >
+            <div className="lg:hidden flex justify-between items-center bg-gray-50 py-3 border-b px-3">
+              <Image
+                src={logo}
+                width={383}
+                height={146}
+                alt="logo"
+                className="lg:w-32 w-24"
+              />
+
+              <button type="button" onClick={() => setIsMobileMenu(false)}>
+                <IoMdClose
+                  size={25}
+                  className="text-gray-500 hover:text-primary"
+                />
+              </button>
+            </div>
+
+            <ul className="lg:flex justify-between items-center gap-10 px-3 ">
+              <li className="text-gray-600 hover:text-primary hover:font-semibold">
+                <Link href={WEBSITE_HOME} className="block py-2">
+                  Home
+                </Link>
+              </li>
+              <li className="text-gray-600 hover:text-primary hover:font-semibold">
+                <Link href="/about-us" className="block py-2">
+                  About
+                </Link>
+              </li>
+              <li className="text-gray-600 hover:text-primary hover:font-semibold">
+                <Link href={WEBSITE_SHOP} className="block py-2">
+                  Men
+                </Link>
+              </li>
+              <li className="text-gray-600 hover:text-primary hover:font-semibold">
+                <Link
+                  href={`${WEBSITE_SHOP}?category=t-shirts`}
+                  className="block py-2"
+                >
+                  Women
+                </Link>
+              </li>
+              <li className="text-gray-600 hover:text-primary hover:font-semibold">
+                <Link
+                  href={`${WEBSITE_SHOP}?category=hoodies`}
+                  className="block py-2"
+                >
+                  Fashion
+                </Link>
+              </li>
+              <li className="text-gray-600 hover:text-primary hover:font-semibold">
+                <Link
+                  href={`${WEBSITE_SHOP}?category=overshized`}
+                  className="block py-2"
+                >
+                  Kids
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="flex justify-between items-center gap-8">
+            <button type="button" onClick={() => setShowSearch(!showSearch)}>
+              <IoIosSearch
+                className="text-gray-500 hover:text-primary cursor-pointer"
+                size={25}
+              />
+            </button>
+
+            <Cart />
+
+            {!auth ? (
+              <Link href={WEBSITE_LOGIN}>
+                <VscAccount
+                  className="text-gray-500 hover:text-primary cursor-pointer"
+                  size={25}
+                />
+              </Link>
+            ) : (
+              <Link href={USER_DASHBOARD}>
+                <Avatar>
+                  <AvatarImage src={auth?.avatar?.url || userIcon.src} />
+                </Avatar>
+              </Link>
+            )}
+
+            <button
+              type="button"
+              className="lg:hidden block"
+              onClick={() => setIsMobileMenu(true)}
+            >
+              <HiMiniBars3
+                size={25}
+                className="text-gray-500 hover:text-primary"
+              />
+            </button>
           </div>
-
-          <LuUser size={22} className="cursor-pointer hover:text-orange-400" />
         </div>
       </div>
-    </header>
+
+      <Search isShow={showSearch} />
+    </div>
   );
-}
+};
+
+export default Header;
