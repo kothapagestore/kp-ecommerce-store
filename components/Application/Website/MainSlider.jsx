@@ -1,67 +1,117 @@
 'use client';
 
+import React from 'react';
 import Slider from 'react-slick';
 import Image from 'next/image';
-import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
-
-import slider1 from '@/public/assets/images/slider-1.jpg';
-import slider2 from '@/public/assets/images/slider-2.jpg';
-import slider3 from '@/public/assets/images/slider-3.jpg';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import slider1 from '@/public/assets/images/slider-1.jpg';
+import slider2 from '@/public/assets/images/slider-2.jpg';
+import slider3 from '@/public/assets/images/slider-3.jpg';
+import slider4 from '@/public/assets/images/slider-4.jpg';
+
+import { LuChevronRight, LuChevronLeft } from 'react-icons/lu';
+
 /* ---------- Arrows ---------- */
-const NextArrow = ({ onClick }) => (
+const ArrowNext = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute right-6 top-1/2 -translate-y-1/2 z-20 bg-white/80 w-12 h-12 rounded-full flex items-center justify-center"
+    type="button"
+    className="w-12 h-12 md:w-14 md:h-14 flex justify-center items-center rounded-full absolute z-10 top-1/2 -translate-y-1/2 bg-white right-4 md:right-10"
   >
-    <LuChevronRight size={26} />
+    <LuChevronRight size={22} className="text-gray-600" />
   </button>
 );
 
-const PrevArrow = ({ onClick }) => (
+const ArrowPrev = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute left-6 top-1/2 -translate-y-1/2 z-20 bg-white/80 w-12 h-12 rounded-full flex items-center justify-center"
+    type="button"
+    className="w-12 h-12 md:w-14 md:h-14 flex justify-center items-center rounded-full absolute z-10 top-1/2 -translate-y-1/2 bg-white left-4 md:left-10"
   >
-    <LuChevronLeft size={26} />
+    <LuChevronLeft size={22} className="text-gray-600" />
   </button>
 );
 
-export default function MainSlider() {
+/* ---------- SLIDES ---------- */
+const slides = [
+  {
+    image: slider1,
+    title: 'Modern Fashion',
+    subtitle: 'Elevate Your Everyday Style',
+  },
+  {
+    image: slider2,
+    title: 'Built for Confidence',
+    subtitle: 'Designed for Style',
+  },
+  {
+    image: slider3,
+    title: 'Wear Your Confidence',
+    subtitle: 'Bold. Timeless. You.',
+  },
+  {
+    image: slider4,
+    title: 'KP STORE',
+    subtitle: 'Premium Fashion for Modern Life',
+  },
+];
+
+const MainSlider = () => {
   const settings = {
     dots: true,
     infinite: true,
+    speed: 700,
     autoplay: true,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    autoplaySpeed: 3500,
+    nextArrow: <ArrowNext />,
+    prevArrow: <ArrowPrev />,
+    responsive: [
+      {
+        breakpoint: 640,
+        settings: {
+          dots: false,
+          arrows: false,
+        },
+      },
+    ],
   };
 
-  const slides = [slider1, slider2, slider3];
-
   return (
-    <section className="relative w-full h-screen">
-      <Slider {...settings}>
-        {slides.map((img, i) => (
-          <div key={i} className="relative w-full h-screen">
+    <section className="relative w-full h-screen overflow-hidden">
+      <Slider {...settings} className="h-screen">
+        {slides.map((slide, index) => (
+          <div key={index} className="relative h-screen">
+            {/* IMAGE */}
             <Image
-              src={img}
-              alt="slider"
+              src={slide.image}
+              alt={`slider-${index + 1}`}
               fill
-              priority
+              priority={index === 0}
               className="object-cover"
             />
 
-            {/* Dark Professional Overlay */}
-            <div className="absolute inset-0 bg-black/15" />
+            {/* OVERLAY */}
+            <div className="absolute inset-0 bg-black/35" />
+
+            {/* TEXT BOTTOM */}
+            <div className="absolute bottom-6 md:bottom-20 left-0 w-full">
+              <div className="px-4 md:px-20 text-white">
+                <h2 className="text-2xl md:text-6xl font-bold">
+                  {slide.title}
+                </h2>
+                <p className="mt-2 text-sm md:text-2xl opacity-90">
+                  {slide.subtitle}
+                </p>
+              </div>
+            </div>
           </div>
         ))}
       </Slider>
     </section>
   );
-}
+};
+
+export default MainSlider;
