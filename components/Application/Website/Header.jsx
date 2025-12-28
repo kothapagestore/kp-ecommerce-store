@@ -80,7 +80,7 @@ export default function Header() {
           <Link href={WEBSITE_HOME} className="flex items-center gap-2">
             <Image src={logo} alt="logo" width={40} height={40} />
             <div>
-              <p className="font-bold text-lg leading-none text-orange-500">
+              <p className="font-bold text-lg h-3 leading-none text-orange-500">
                 KP STORE
               </p>
               <span className="text-xs text-orange-400">Online Shop</span>
