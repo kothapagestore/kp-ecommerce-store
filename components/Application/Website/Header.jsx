@@ -26,8 +26,6 @@ export default function Header() {
 
   const router = useRouter();
   const pathname = usePathname();
-
-  // Desktop search wrapper ref
   const desktopSearchRef = useRef(null);
 
   /* Close search on route change */
@@ -40,7 +38,7 @@ export default function Header() {
     if (!showSearch) return;
 
     const isDesktop = window.innerWidth >= 1024;
-    if (!isDesktop) return; // 🚫 disable outside click on mobile
+    if (!isDesktop) return;
 
     const handleClickOutside = (e) => {
       if (
@@ -52,9 +50,7 @@ export default function Header() {
     };
 
     const handleEsc = (e) => {
-      if (e.key === 'Escape') {
-        setShowSearch(false);
-      }
+      if (e.key === 'Escape') setShowSearch(false);
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -79,36 +75,57 @@ export default function Header() {
     <>
       {/* HEADER */}
       <header className="fixed top-0 left-0 w-full z-[9999] bg-transparent">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-white">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-orange-500">
           {/* LOGO */}
           <Link href={WEBSITE_HOME} className="flex items-center gap-2">
             <Image src={logo} alt="logo" width={40} height={40} />
             <div>
-              <p className="font-bold text-lg leading-none">KP STORE</p>
-              <span className="text-xs opacity-80">Online Shop</span>
+              <p className="font-bold text-lg leading-none text-orange-500">
+                KP STORE
+              </p>
+              <span className="text-xs text-orange-400">Online Shop</span>
             </div>
           </Link>
 
           {/* DESKTOP MENU */}
           <nav className="hidden lg:flex gap-10 font-semibold tracking-wide">
-            <Link href={WEBSITE_HOME}>Home</Link>
-            <Link href={WEBSITE_SHOP}>Men</Link>
-            <Link href={`${WEBSITE_SHOP}?category=women`}>Women</Link>
-            <Link href={`${WEBSITE_SHOP}?category=fashion`}>Fashion</Link>
-            <Link href={`${WEBSITE_SHOP}?category=kids`}>Kids</Link>
+            <Link href={WEBSITE_HOME} className="hover:text-orange-600">
+              Home
+            </Link>
+            <Link href={WEBSITE_SHOP} className="hover:text-orange-600">
+              Men
+            </Link>
+            <Link
+              href={`${WEBSITE_SHOP}?category=women`}
+              className="hover:text-orange-600"
+            >
+              Women
+            </Link>
+            <Link
+              href={`${WEBSITE_SHOP}?category=fashion`}
+              className="hover:text-orange-600"
+            >
+              Fashion
+            </Link>
+            <Link
+              href={`${WEBSITE_SHOP}?category=kids`}
+              className="hover:text-orange-600"
+            >
+              Kids
+            </Link>
           </nav>
 
           {/* ICONS */}
           <div className="flex items-center gap-6 relative">
-            {/* SEARCH ICON */}
+            {/* SEARCH */}
             <div ref={desktopSearchRef} className="relative">
               <IoIosSearch
                 size={22}
-                className="cursor-pointer"
+                className="cursor-pointer hover:text-orange-600"
                 onClick={() => setShowSearch((prev) => !prev)}
               />
 
-              {/* DESKTOP SEARCH */}
+              {/* DESKTOP SEARCH BOX */}
               {showSearch && (
                 <form
                   onSubmit={handleSearch}
@@ -135,7 +152,7 @@ export default function Header() {
             <Cart />
 
             <Link href={WEBSITE_LOGIN}>
-              <VscAccount size={22} />
+              <VscAccount size={22} className="hover:text-orange-600" />
             </Link>
 
             <button className="lg:hidden" onClick={() => setIsMobileMenu(true)}>
@@ -145,7 +162,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* MOBILE SEARCH OVERLAY */}
+      {/* MOBILE SEARCH */}
       {showSearch && (
         <div className="lg:hidden fixed inset-0 z-[10001] bg-black/70">
           <form
@@ -181,17 +198,17 @@ export default function Header() {
 
       {/* MOBILE MENU */}
       <div
-        className={`fixed inset-0 z-[10000] bg-black/90 text-white transform transition-transform duration-300
+        className={`fixed inset-0 z-[10000] bg-black/90 text-orange-400 transform transition-transform duration-300
         ${isMobileMenu ? 'translate-x-0' : 'translate-x-full'}`}
       >
-        <div className="flex justify-between items-center px-6 py-4 border-b">
+        <div className="flex justify-between items-center px-6 py-4 border-b border-orange-400/20">
           <Image src={logo} alt="logo" width={40} height={40} />
           <button onClick={() => setIsMobileMenu(false)}>
             <IoMdClose size={28} />
           </button>
         </div>
 
-        <nav className="flex flex-col gap-6 px-6 py-10 text-lg">
+        <nav className="flex flex-col gap-6 px-6 py-10 text-lg font-semibold">
           <Link onClick={() => setIsMobileMenu(false)} href={WEBSITE_HOME}>
             Home
           </Link>
