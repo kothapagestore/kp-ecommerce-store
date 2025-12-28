@@ -45,11 +45,11 @@ const Header = () => {
           <nav className="hidden lg:flex items-center gap-10">
             {[
               ['Home', WEBSITE_HOME],
-              ['About', '/about-us'],
+              ['Men', WEBSITE_HOME],
               ['Shop', WEBSITE_SHOP],
               ['T-shirt', `${WEBSITE_SHOP}?category=t-shirts`],
               ['Hoodies', `${WEBSITE_SHOP}?category=hoodies`],
-              ['Oversized', `${WEBSITE_SHOP}?category=overshized`],
+              ['Women', `${WEBSITE_SHOP}?category=Women`],
             ].map(([label, href]) => (
               <Link
                 key={label}
@@ -111,11 +111,11 @@ const Header = () => {
         <ul className="flex flex-col gap-6 px-6 pt-10">
           {[
             ['Home', WEBSITE_HOME],
-            ['About', '/about-us'],
+            ['Men', WEBSITE_HOME],
             ['Shop', WEBSITE_SHOP],
             ['T-shirt', `${WEBSITE_SHOP}?category=t-shirts`],
             ['Hoodies', `${WEBSITE_SHOP}?category=hoodies`],
-            ['Oversized', `${WEBSITE_SHOP}?category=overshized`],
+            ['Women', `${WEBSITE_SHOP}?category=Women`],
           ].map(([label, href]) => (
             <li key={label}>
               <Link
